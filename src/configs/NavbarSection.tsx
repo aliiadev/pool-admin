@@ -17,7 +17,29 @@ export const navbarSections: NavbarSectionType[] = [
     {
         icon: <IconBuildingStore />,
         pageUrl: '/products',
-        label: 'Products'
+        label: 'Products',
+        children: [
+            {
+                pageUrl: '/products',
+                label: 'Product List',
+            },
+            {
+                pageUrl: '/product',
+                label: 'Category List',
+            },
+            {
+                pageUrl: '/product',
+                label: 'Brand List',
+            },
+            {
+                pageUrl: '/product',
+                label: 'Import Product',
+            },
+            {
+                pageUrl: '/product',
+                label: 'Print Barcode',
+            },
+        ]
     },
     {
         icon: <IconLogin2 />,

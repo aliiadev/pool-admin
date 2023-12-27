@@ -1,5 +1,5 @@
-import { navbarSections } from '@configs/NavbarSection';
-import { AppShell, Burger, Group, NavLink, ScrollArea } from '@mantine/core';
+import { NavbarSectionType, navbarSections } from '@configs/NavbarSection';
+import { AppShell, Burger, NavLink, ScrollArea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { MantineLogo } from '@mantinex/mantine-logo';
 import { Outlet, NavLink as RNavLink } from 'react-router-dom';
@@ -10,6 +10,31 @@ const Layout = () => {
 
     const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
     const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+
+    const navLinkRender = (navbar: NavbarSectionType[]) => {
+        return (
+            navbar.map(({ pageUrl, icon, label, children }) => (
+                <RNavLink
+                    key={pageUrl}
+                    to={pageUrl}
+                    style={{ all: 'unset' }}
+                >
+                    {({ isActive }) => (
+                        <NavLink
+                            active={isActive}
+                            leftSection={icon}
+                            label={label}
+                            variant="filled"
+                            className='rounded-md'
+                            childrenOffset={children && 36}
+                        >
+                            {children && navLinkRender(children)}
+                        </NavLink>
+                    )}
+                </RNavLink>
+            ))
+        )
+    }
 
     return (
         <AppShell
@@ -33,23 +58,7 @@ const Layout = () => {
             </AppShell.Header>
             <AppShell.Navbar p="md">
                 <AppShell.Section grow my="md" component={ScrollArea}>
-                    {navbarSections.map(({ pageUrl, icon, label }) => (
-                        <RNavLink
-                            key={pageUrl}
-                            to={pageUrl}
-                            style={{ all: 'unset' }}
-                        >
-                            {({ isActive }) => (
-                                <NavLink
-                                    active={isActive}
-                                    leftSection={icon}
-                                    label={label}
-                                    variant="filled"
-                                    className='rounded-md'
-                                />
-                            )}
-                        </RNavLink>
-                    ))}
+                    {navLinkRender(navbarSections)}
                 </AppShell.Section>
             </AppShell.Navbar>
             <AppShell.Main>
