@@ -3,6 +3,7 @@ import { AppShell, Burger, Group, NavLink, ScrollArea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { MantineLogo } from '@mantinex/mantine-logo';
 import { Outlet, NavLink as RNavLink } from 'react-router-dom';
+import UserSetting from './UserSetting';
 
 
 const Layout = () => {
@@ -21,11 +22,14 @@ const Layout = () => {
             padding="md"
         >
             <AppShell.Header>
-                <Group h="100%" px="md">
+                <div className='flex w-full flex-row items-center h-full px-3 gap-3'>
                     <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
                     <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
                     <MantineLogo size={30} />
-                </Group>
+                    <div className='w-full flex justify-end'>
+                        <UserSetting />
+                    </div>
+                </div>
             </AppShell.Header>
             <AppShell.Navbar p="md">
                 <AppShell.Section grow my="md" component={ScrollArea}>
@@ -40,6 +44,8 @@ const Layout = () => {
                                     active={isActive}
                                     leftSection={icon}
                                     label={label}
+                                    variant="filled"
+                                    className='rounded-md'
                                 />
                             )}
                         </RNavLink>

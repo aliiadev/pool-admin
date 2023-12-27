@@ -1,9 +1,10 @@
 import ReactDOM from 'react-dom/client'
-import './index.css';
+
 import App from './App.tsx'
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';
 import 'mantine-react-table/styles.css'; //import MRT styles
+import './index.css';
 import '@mantine/nprogress/styles.css';
 import '@fontsource/montserrat/300.css';
 import '@fontsource/montserrat/400.css';
